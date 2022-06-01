@@ -1,7 +1,8 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { url } from "..";
 
 const AuthContext = createContext();
 
@@ -10,7 +11,7 @@ const AuthProvider = ({ children }) => {
 
   const authLogin = async (data) => {
     await axios
-      .post("https://doit-bsedano.herokuapp.com/login", data)
+      .post(`${url}/login`, data)
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("token", res.data.accessToken);
@@ -25,7 +26,7 @@ const AuthProvider = ({ children }) => {
   };
   const authRegister = async (data) => {
     await axios
-      .post("https://doit-bsedano.herokuapp.com/register", data)
+      .post(`${url}/register`, data)
       .then((res) => {
         console.log(res.data);
         toast.success("Usuário cadastrado com sucesso!");
